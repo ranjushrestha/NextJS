@@ -7,11 +7,9 @@ const DataFetchServer = async ({ searchParams }: Props) => {
 
   const rawName = params.name;
 
-  const name = Array.isArray(rawName)
-    ? rawName[0]
-    : rawName;
+  const name = Array.isArray(rawName) ? rawName[0] : rawName;
 
-  if (!name ) {
+  if (!name) {
     return (
       <div>
         <h1>No name provided</h1>
@@ -26,19 +24,19 @@ const DataFetchServer = async ({ searchParams }: Props) => {
   }
 
   const data = await res.json();
-  const probability = Math.trunc(data.probability * 100)
-  console.log(data)
-  const isFemale = data.gender === "female"
+  
+  const probability = Math.trunc(data.probability * 100);
+  const isFemale = data.gender === "female";
 
   return (
     <div>
       <h1>Data Fetching</h1>
-      <div className={` ${isFemale || data.name === "anuj"  ? "bg-pink-400" : "bg-blue-500"} `}>
- {data.name} {data.count} {probability}%
-
- <div>{data.gender.charAt(0).toUpperCase()+data.gender.slice(1)}</div>
+      <div
+        className={` ${isFemale || data.name === "anuj" ? "bg-pink-400" : "bg-blue-500"} `}
+      >
+        {data.name} {data.count} {probability}%
+        <div>{data.gender.charAt(0).toUpperCase() + data.gender.slice(1)}</div>
       </div>
-     
     </div>
   );
 };
